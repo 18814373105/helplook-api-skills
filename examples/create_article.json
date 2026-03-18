@@ -1,0 +1,14 @@
+{
+  "type": 2,
+  "name": "示例文章",
+  "status": 1,
+  "parent_id": 0,
+  "version_id": 0,
+  "editor_type": 2,
+  "content": "# 标题\n\n正文内容",
+  "metadata": {
+    "slug": "example-article",
+    "seo_title": "示例文章 - SEO 标题",
+    "seo_desc": "示例文章描述"
+  }
+}

@@ -1,3 +1,2 @@
-# HelpLook API Skills - Python scripts
-# 仅使用 Python 标准库，无需安装额外依赖
+# HelpLook Content API 脚本使用 Python 标准库，无需额外依赖
 # Python 3.7+ 即可运行

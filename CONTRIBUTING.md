@@ -1,29 +1,20 @@
 # 贡献指南
 
-感谢您对 HelpLook API Skills 项目的关注！
+欢迎为 HelpLook API Skill 贡献代码或文档。
 
-## 如何贡献
+## 开发环境
 
-1. **Fork** 本仓库
-2. **创建分支**：`git checkout -b feature/your-feature`
-3. **提交更改**：`git commit -m "feat: 添加 xxx 功能"`
-4. **推送分支**：`git push origin feature/your-feature`
-5. **提交 Pull Request**
+- Python 3.7+
+- 无需额外依赖（使用标准库）
 
 ## 提交规范
 
-- `feat`: 新功能
-- `fix`: 修复问题
-- `docs`: 文档更新
-- `refactor`: 代码重构
-- `test`: 测试相关
+- 遵循现有脚本风格
+- 新增接口脚本请同步更新 `SKILL.md` 与 `references/`
+- 提交前确保脚本可正常运行
 
-## 代码格式
+## 目录说明
 
-- Python 代码遵循 PEP 8
-- 使用 4 空格缩进
-
-## 注意事项
-
-- 请勿提交 `api-key.json` 或 `api-key-dev.json`，包含真实密钥的配置文件会被忽略
-- 新增脚本时请同步更新 `references/tools.md` 和 `scripts/README.md`
+- `scripts/` - API 调用脚本
+- `references/` - 接口参考文档
+- `examples/` - 使用示例

@@ -1,3 +1,4 @@
 {
-  "api_key": "your-api-key-here"
+  "api_key": "your-helplook-api-key",
+  "api_host": "https://api.helplook.net"
 }

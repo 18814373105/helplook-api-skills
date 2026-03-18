@@ -1,92 +1,78 @@
-# HelpLook API Skills
+# HelpLook Content API Skill
 
-OpenClaw Agent Skill for [HelpLook](https://www.helplook.net/) knowledge base article management.
-
-## 简介
-
-本 Skill 帮助 AI Agent 使用 HelpLook 接口管理知识库文章、目录、搜索等。
-
-## 适用场景
-
-- 已配置 HelpLook API Key
-- 需要 AI 协助浏览、搜索、创建、编辑、发布或删除知识库文章
-- 需要 AI 理解 HelpLook 文章结构（目录/文章、草稿/发布）
+HelpLook 内容 API 接口封装，提供 Skill 与纯 Python 调用脚本。
 
 ## 目录结构
 
 ```
 helplook-api-skills/
-├── SKILL.md           # 主技能文件（指令与快速参考）
-├── README.md          # 本文件
-├── CHANGELOG.md       # 变更日志
-├── CONTRIBUTING.md    # 贡献指南
-├── LICENSE            # MIT 许可证
-├── api-key.json.example   # API 配置模板
-├── api-key-dev.json   # 本地开发配置（gitignore）
-├── pyproject.toml     # Python 项目配置
-├── requirements.txt   # 依赖声明
-├── references/        # 参考文档
-│   └── tools.md      # 工具参数参考
-├── examples/         # 示例
-│   └── usage.md      # 调用示例
-└── scripts/          # Python 可执行脚本
-    ├── mcp_client.py  # API 客户端（内部实现）
-    ├── article_list.py
-    ├── article_search.py
-    ├── article_get.py
-    ├── article_create.py
-    ├── article_update.py
-    ├── article_update_content.py
-    ├── article_publish.py
-    ├── article_delete.py
-    ├── article_version_list.py
-    ├── article_hot_list.py
-    └── README.md
+├── SKILL.md              # Skill 定义
+├── README.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── api-key.json.example  # API 配置示例
+├── pyproject.toml
+├── requirements.txt
+├── examples/             # 使用示例
+├── references/           # 接口参考文档
+└── scripts/              # Python 调用脚本
 ```
 
-## 安装
+## 快速开始
 
-参考 OpenClaw 文档，将本仓库或 `SKILL.md` 配置到 Agent 技能目录。
-
-## 配置
-
-### 环境变量
-
-```bash
-export HELPLOOK_API_KEY=your-api-key
-```
-
-### 或使用配置文件
+### 1. 配置 API Key
 
 ```bash
 cp api-key.json.example api-key.json
-# 编辑 api-key.json 填写 api_key
+# 编辑 api-key.json 填入真实 api_key
 ```
 
-## 前置条件
+或使用环境变量：
 
-1. **HelpLook 企业版**：需在 HelpLook 企业版中获取 API Key
-2. **API Key**：在 HelpLook 后台生成并配置
+```bash
+export HELPLOOK_API_KEY="your-api-key"
+export HELPLOOK_API_HOST="https://api.helplook.net"  # 可选
+```
 
-## 工具列表
+### 2. 运行脚本
 
-| 工具 | 用途 |
+```bash
+# 获取文章列表
+python3 scripts/content_list.py
+
+# 获取文章详情
+python3 scripts/content_view.py 123
+
+# 热门文章（无需 API Key）
+python3 scripts/content_hot_list.py YOUR_STRING_ID
+```
+
+## 接口与脚本映射
+
+| 接口 | 脚本 |
 |------|------|
-| article_list | 获取文章/目录树形列表 |
-| article_search | 关键词全文搜索 |
-| article_get | 获取单篇文章详情 |
-| article_create | 新建文章或目录 |
-| article_update | 修改文章/目录 |
-| article_update_content | 仅更新正文 |
-| article_publish | 发布草稿 |
-| article_delete | 删除文章 |
-| article_version_list | 版本列表 |
-| article_hot_list | 推荐/热门文章 |
+| GET /api/content | content_list.py |
+| GET /api/content/:id | content_view.py |
+| POST /api/content/create | content_create.py |
+| PUT /api/content/:id | content_update.py |
+| DELETE /api/content/:id | content_delete.py |
+| POST /api/content/upload-file | content_upload_file.py |
+| GET /api/content/hot-list | content_hot_list.py |
+| GET /api/content/get-list | content_get_list.py |
+| GET /api/content/get-content | content_get_content.py |
+| POST /api/content/update-content | content_update_content.py |
+| POST /api/content/publish-article | content_publish_article.py |
+| POST /api/content/add-file | content_add_file.py |
+| POST /api/content/remove-article | content_remove_article.py |
+| GET /api/content/get-version-list | content_get_version_list.py |
+| GET /api/es | es_search.py |
+| GET /api/es/search-tannant | es_search_tannant.py |
 
-## 许可证
+## 依赖
+
+纯 Python 实现，仅使用标准库（`urllib`、`json`、`os`），无第三方依赖。
+
+## License
 
 MIT
-
-## 相关链接
-
-- [HelpLook](https://www.helplook.net/)

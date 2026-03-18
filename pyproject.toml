@@ -4,25 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "helplook-api-skills"
-version = "1.0.0"
-description = "HelpLook API Skills - OpenClaw Agent Skill & Python scripts"
+version = "0.1.0"
+description = "HelpLook Content API Skill"
 readme = "README.md"
-license = {text = "MIT"}
 requires-python = ">=3.7"
-authors = [
-    {name = "HelpLook"}
-]
-keywords = ["helplook", "openclaw", "skill", "knowledge-base", "api"]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-]
+license = { text = "MIT" }
+authors = [{ name = "HelpLook" }]
 
-[project.optional-dependencies]
-dev = []
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scripts*"]

@@ -1,72 +1,88 @@
 ---
-name: helplook-article-tools
+name: helplook-content-api
 description: >-
-  Guides the agent to use HelpLook API for knowledge base article management.
-  Use when the user needs to list, search, create, update, publish, or delete articles.
-  Applies to HelpLook docs, knowledge base, or article management.
+  调用 HelpLook Content API 进行文档管理。适用于集成 HelpLook 帮助中心、
+  管理文章、目录、或用户提及 helplook API、content API、文档 API 时。
 ---
 
-# HelpLook 知识库文章管理
+# HelpLook Content API Skill
 
-使用以下工具管理 HelpLook 知识库文章、目录、搜索等。
+HelpLook Content API 接口文档与 Python 调用脚本。
 
-## 前置条件
+## 认证
 
-- 已配置 HelpLook API Key（api_key）
-- 仅企业版 HelpLook 支持该接口
+除 `hot-list` 外，所有接口需认证：
 
-## 工具选择
+- **Header**: `x-api-key: YOUR_API_KEY`
+- **或 Query/Body**: `token=YOUR_API_KEY`
 
-| 用户意图 | 使用工具 |
-|----------|----------|
-| 浏览/列出文章结构 | `article_list` |
-| 按关键词搜索 | `article_search` |
-| 获取单篇详情 | `article_get` |
-| 新建文章或目录 | `article_create` |
-| 修改标题/正文/状态 | `article_update` |
-| 仅改正文 | `article_update_content` |
-| 草稿发布上线 | `article_publish` |
-| 删除文章 | `article_delete` |
+企业版 (PLAN_V2) 有效期内方可调用。
 
-## 常用参数
+## 环境变量
 
-| 参数 | 含义 |
-|------|------|
-| `type` | 1=目录 2=文章 |
-| `parent_id` | 父级目录 ID，0=根目录 |
-| `editor_type` | 2=Markdown 3=富文本 |
-| `status` | 1=已发布 2=草稿 3=回收站 |
-| `is_write` | 1=保存并发布 2=仅保存草稿 |
+| 变量 | 说明 | 默认 |
+|------|------|------|
+| `HELPLOOK_API_HOST` | API 根地址 | `https://api.helplook.net` |
+| `HELPLOOK_API_KEY` | API Key（认证用） | 必填 |
 
-## 调用流程建议
+## 接口列表
 
-1. **先搜索再详情**：用户想找某篇文章时，先用 `article_search` 按关键词搜索，再用 `article_get` 获取详情
-2. **创建前选父级**：新建文章时，用 `article_list` 获取目录结构，确定 `parent_id`
-3. **草稿先更新再发布**：新建默认草稿，可多次 `article_update_content` 修改，最后用 `article_publish` 发布
+| 接口 | 方法 | 路径 | 脚本 |
+|------|------|------|------|
+| 文章列表 | GET | `/api/content` | `content_list.py` |
+| 文章详情 | GET | `/api/content/:id` | `content_view.py` |
+| 创建文档 | POST | `/api/content/create` | `content_create.py` |
+| 更新文章 | PUT | `/api/content/:id` | `content_update.py` |
+| 删除文章 | DELETE | `/api/content/:id` | `content_delete.py` |
+| 上传文件 | POST | `/api/content/upload-file` | `content_upload_file.py` |
+| 热门文章 | GET | `/api/content/hot-list` | `content_hot_list.py` |
+| 获取文档列表 | GET | `/api/content/get-list` | `content_get_list.py` |
+| 获取文档内容 | GET | `/api/content/get-content` | `content_get_content.py` |
+| 更新文档内容 | POST | `/api/content/update-content` | `content_update_content.py` |
+| 发布文章 | POST | `/api/content/publish-article` | `content_publish_article.py` |
+| 导入文件 | POST | `/api/content/add-file` | `content_add_file.py` |
+| 删除文章(批量) | POST | `/api/content/remove-article` | `content_remove_article.py` |
+| 版本列表 | GET | `/api/content/get-version-list` | `content_get_version_list.py` |
+| 全站搜索 | GET | `/api/es` | `es_search.py` |
+| 全站搜索(token) | GET | `/api/es/search-tannant` | `es_search_tannant.py` |
 
-## 脚本工具
-
-scripts/ 目录提供可执行的 Python 脚本，用于命令行调用：
+## 使用脚本
 
 ```bash
-cd scripts
-export HELPLOOK_API_KEY=your-api-key
+# 设置环境变量
+export HELPLOOK_API_KEY="your-api-key"
+export HELPLOOK_API_HOST="https://api.helplook.net"  # 可选
 
-python article_list.py                    # 列表
-python article_search.py "关键词"         # 搜索
-python article_get.py -i 123              # 详情
-python article_create.py "标题" -c "内容"  # 创建
-python article_update.py -i 123 "标题" "内容"  # 更新
-python article_update_content.py -i 123 "正文" # 仅更新正文
-python article_publish.py 123             # 发布
-python article_delete.py 123              # 删除
-python article_version_list.py           # 版本列表
-python article_hot_list.py                # 热门列表
+# 示例：获取文章列表
+python3 scripts/content_list.py
+
+# 示例：获取文章详情（id 可为数字或 slug）
+python3 scripts/content_view.py 123
+python3 scripts/content_view.py my-article-slug
+
+# 示例：热门文章（无需 API Key，需传 id 即 string_id）
+python3 scripts/content_hot_list.py YOUR_STRING_ID
 ```
 
-配置：复制 `api-key.json.example` 为 `api-key.json` 并填写，或设置环境变量。详见 [scripts/README.md](scripts/README.md)
+## 参数说明
+
+### content_create / content_update
+
+- `type`: 1=目录, 2=文章
+- `name`: 名称，必填，≤200 字
+- `status`: 1=草稿, 2=已发布, 3=仅更新用
+- `parent_id`: 父级 ID，0 为根
+- `editor_type`: 2=Markdown, 3=富文本
+- `content`: 正文内容
+- `metadata`: `{ slug, cover, seo_title, seo_keyword, seo_desc }`
+
+### content_get_content / content_update_content
+
+- `id` 或 `slug`: 二选一
+- `version_slug`: 版本 slug（可选）
+- `editor_type`: 2=Markdown, 3=富文本
+- `is_write`: 1=同时发布, 2=仅保存草稿
 
 ## 详细参考
 
-- 完整参数说明见 [references/tools.md](references/tools.md)
-- 调用示例见 [examples/usage.md](examples/usage.md)
+完整参数与错误码见 [references/content-api.md](references/content-api.md)。
