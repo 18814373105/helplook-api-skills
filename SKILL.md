@@ -70,7 +70,7 @@ python3 scripts/content_hot_list.py YOUR_STRING_ID
 
 - `type`: 1=目录, 2=文章
 - `name`: 名称，必填，≤200 字
-- `status`: 1=草稿, 2=已发布, 3=仅更新用
+- `status`: 1=发布, 2=草稿, 3=仅更新用
 - `parent_id`: 父级 ID，0 为根
 - `editor_type`: 2=Markdown, 3=富文本
 - `content`: 正文内容

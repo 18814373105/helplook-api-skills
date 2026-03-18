@@ -16,7 +16,7 @@
 **Body (JSON)**:
 - `type` (必填): 1=目录, 2=文章
 - `name` (必填): 名称，≤200 字
-- `status` (必填): 1=草稿, 2=已发布
+- `status` (必填): 1=发布, 2=草稿
 - `parent_id` (可选): 父级 ID，默认 0
 - `version_id` (可选): 版本 ID
 - `editor_type` (必填): 2=Markdown, 3=富文本
