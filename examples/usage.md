@@ -1,4 +1,4 @@
-# HelpLook MCP 工具调用示例
+# HelpLook 工具调用示例
 
 ## 搜索并获取文章
 

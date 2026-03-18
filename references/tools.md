@@ -1,4 +1,4 @@
-# HelpLook MCP 工具参考
+# HelpLook 工具参考
 
 ## article_list
 

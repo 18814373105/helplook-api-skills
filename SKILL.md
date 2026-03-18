@@ -1,20 +1,19 @@
 ---
-name: helplook-mcp-tools
+name: helplook-article-tools
 description: >-
-  Guides the agent to use HelpLook MCP tools for knowledge base article management.
-  Use when the user has connected a HelpLook MCP server and needs to list, search,
-  create, update, publish, or delete articles. Applies to HelpLook docs, knowledge base,
-  article management, or helplook MCP.
+  Guides the agent to use HelpLook API for knowledge base article management.
+  Use when the user needs to list, search, create, update, publish, or delete articles.
+  Applies to HelpLook docs, knowledge base, or article management.
 ---
 
-# HelpLook MCP 文章管理工具
+# HelpLook 知识库文章管理
 
-当用户已配置 HelpLook MCP 服务器时，使用以下工具管理知识库文章。
+使用以下工具管理 HelpLook 知识库文章、目录、搜索等。
 
 ## 前置条件
 
-- 用户已在 Cursor 中配置 HelpLook MCP 服务器（需提供 MCP 服务 URL 和 x-api-key）
-- 仅企业版 HelpLook 支持 MCP 接口
+- 已配置 HelpLook API Key（api_key）
+- 仅企业版 HelpLook 支持该接口
 
 ## 工具选择
 
@@ -47,7 +46,7 @@ description: >-
 
 ## 脚本工具
 
-scripts/ 目录提供可执行的 Python 脚本，用于命令行调用 MCP 工具：
+scripts/ 目录提供可执行的 Python 脚本，用于命令行调用：
 
 ```bash
 cd scripts

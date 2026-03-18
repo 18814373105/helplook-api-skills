@@ -1,6 +1,6 @@
-# HelpLook MCP Python 脚本
+# HelpLook API Python 脚本
 
-通过 HTTP 调用 HelpLook MCP 接口的 Python 脚本，可用于自动化、测试或命令行操作。
+通过 HTTP 调用 HelpLook 接口的 Python 脚本，可用于自动化、测试或命令行操作。
 
 ## 配置
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-HelpLook MCP 客户端
-通过 HTTP JSON-RPC 2.0 调用 MCP 工具
+HelpLook API 客户端
+通过 HTTP 调用 HelpLook 接口
 """
 import json
 import os
@@ -9,7 +9,7 @@ import sys
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
-# 默认 MCP 接口地址（仅内部/本地测试可覆盖，不向用户暴露）
+# 默认接口地址（仅内部/本地测试可覆盖，不向用户暴露）
 _DEFAULT_MCP_URL = "https://testing2-api.helplook.net/mcp/server"
 
 
@@ -19,7 +19,7 @@ def call_tool(
     tool_name: str,
     arguments: dict | None = None,
 ) -> dict:
-    """调用 MCP 工具"""
+    """调用接口"""
     arguments = arguments or {}
     payload = {
         "jsonrpc": "2.0",
@@ -46,7 +46,7 @@ def call_tool(
         raise SystemExit(f"Request failed: {e.reason}")
 
     if "error" in data:
-        raise SystemExit(f"MCP Error: {data['error']}")
+        raise SystemExit(f"API Error: {data['error']}")
 
     result = data.get("result", {})
     content = result.get("content", [])

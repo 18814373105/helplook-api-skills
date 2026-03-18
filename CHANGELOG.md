@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- `SKILL.md` - Cursor Agent Skill 主文件
+- `SKILL.md` - Agent Skill 主文件
 - `scripts/` - Python 可执行脚本
-  - `mcp_client.py` - MCP 客户端核心
+  - `mcp_client.py` - API 客户端核心
   - `article_list.py` - 获取文章/目录列表
   - `article_search.py` - 关键词搜索
   - `article_get.py` - 获取文章详情

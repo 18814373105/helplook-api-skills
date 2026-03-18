@@ -1,6 +1,6 @@
 # 贡献指南
 
-感谢您对 HelpLook MCP Skill 项目的关注！
+感谢您对 HelpLook API Skills 项目的关注！
 
 ## 如何贡献
 
