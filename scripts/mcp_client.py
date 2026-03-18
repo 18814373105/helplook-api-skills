@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
 # 默认 MCP 接口地址（仅内部/本地测试可覆盖，不向用户暴露）
-_DEFAULT_MCP_URL = "https://api.helplook.net/mcp/server"
+_DEFAULT_MCP_URL = "https://testing2-api.helplook.net/mcp/server"
 
 
 def call_tool(
